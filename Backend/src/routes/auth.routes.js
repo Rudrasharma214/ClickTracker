@@ -12,10 +12,7 @@ const authRoutes = express.Router();
  * @desc Register a new user
  * @access Public
  */
-authRoutes.post(
-    '/signup',
-    authController.signup
-);
+authRoutes.post('/signup', authController.signup);
 
 // /**
 //  * @route POST /api/auth/login
