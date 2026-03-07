@@ -4,6 +4,12 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
+    "dev": "nodemon src/server.mjs",
+    "start": "node src/server.mjs",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +23,12 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.2.4",
     "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.1"
   }
 }
