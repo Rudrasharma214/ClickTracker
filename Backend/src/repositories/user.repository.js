@@ -37,8 +37,8 @@ export class UserRepository {
   // Update refresh token for user
   async updateRefreshToken(userId, refreshToken) {
     try {
-      const user = await User.findByIdAndUpdate(
-        userId,
+      const user = await User.findOneAndReplace(
+        { _id: userId },
         { refresh_token: refreshToken },
         { new: true }
       ).select('-password');

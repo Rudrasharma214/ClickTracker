@@ -1,6 +1,6 @@
 import { STATUS } from '../constant/statusCodes.js';
 import { UserRepository } from '../repositories/user.repository.js';
-import { verifyPassword } from '../utils/password.js';
+import { hashPassword, verifyPassword } from '../utils/password.js';
 import { generateToken, generateRefreshToken, verifyToken } from '../utils/token.js';
 
 const userRepo = new UserRepository();
@@ -18,14 +18,21 @@ export class AuthService {
         };
       }
 
-      const userData = { name, email, password };
+      const hashedPassword = await hashPassword(password);
+
+      const userData = { name, email, password: hashedPassword };
       const user = await userRepo.create(userData);
 
       return {
         success: true,
         status: STATUS.CREATED,
         message: 'User created successfully',
-        data: user,
+        data: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          createdAt: user.createdAt,
+        },
       };
     } catch (error) {
       return {
@@ -67,7 +74,6 @@ export class AuthService {
         success: true,
         status: STATUS.OK,
         message: 'Login successful',
-        data: user,
         tokens: {
           accessToken,
           refreshToken,
@@ -133,9 +139,6 @@ export class AuthService {
         success: true,
         status: STATUS.OK,
         message: 'Token refreshed successfully',
-        data: {
-          accessToken: newAccessToken,
-        },
       };
     } catch (error) {
       return {

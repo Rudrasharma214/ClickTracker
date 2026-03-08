@@ -55,7 +55,7 @@ export class AuthController {
       res.cookie('accessToken', user.tokens.accessToken, ACCESS_TOKEN_COOKIE_OPTIONS);
       res.cookie('refreshToken', user.tokens.refreshToken, COOKIE_OPTIONS);
 
-      sendResponse(res, user.status, user.message, user.data);
+      sendResponse(res, user.status, user.message, null);
     } catch (error) {
       next(error);
     }
@@ -99,7 +99,7 @@ export class AuthController {
 
       res.cookie('accessToken', result.data.accessToken, ACCESS_TOKEN_COOKIE_OPTIONS);
 
-      sendResponse(res, result.status, result.message, result.data);
+      sendResponse(res, result.status, result.message, null);
     } catch (error) {
       next(error);
     }
