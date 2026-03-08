@@ -6,6 +6,7 @@ const env = {
   PORT: process.env.PORT || 5000,
   MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/clicktracker',
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
+  SHORT_URL_DOMAIN: process.env.SHORT_URL_DOMAIN || 'http://localhost:5000',
   JWT_ACCESS_EXPIRES_IN: process.env.JWT_ACCESS_EXPIRES_IN || '15m',
   JWT_REFRESH_EXPIRES_IN: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
   JWT_SECRET: process.env.JWT_SECRET || 'your_jwt_secret_key',

@@ -9,6 +9,7 @@ export const STATUS = {
   UNAUTHORIZED: 401, // Missing or invalid auth token
   FORBIDDEN: 403, // Authenticated but not authorized for this action
   NOT_FOUND: 404, // Requested resource doesn't exist
+  GONE: 410, // Resource no longer available (expired/deleted)
   METHOD_NOT_ALLOWED: 405, // Wrong HTTP method for this endpoint
   CONFLICT: 409, // Resource already exists or conflicts
   UNPROCESSABLE_ENTITY: 422, // Input validation failed
