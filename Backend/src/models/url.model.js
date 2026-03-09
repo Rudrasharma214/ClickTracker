@@ -78,11 +78,10 @@ urlSchema.index({ userId: 1, isActive: 1 });
 urlSchema.index({ userId: 1, createdAt: -1 });
 
 // Pre-save hook to validate expiration
-urlSchema.pre('save', function (next) {
+urlSchema.pre('save', function () {
   if (this.expiresAt && this.expiresAt < new Date()) {
-    next(new Error('Expiration date must be in the future'));
+    throw new Error('Expiration date must be in the future');
   }
-  next();
 });
 
 // Virtual to check if URL is expired

@@ -148,12 +148,20 @@ export class UrlService {
       const urls = await urlRepo.findByUserId(userId, filters);
       const totalCount = await urlRepo.countByUserId(userId);
 
+      const allUrls = urls.map((url) => ({
+        id: url._id,
+        longUrl: url.longUrl,
+        shortUrl: url.shortUrl,
+        customAlias: url.customAlias,
+        isActive: url.isActive,
+      }));
+
       return {
         success: true,
         status: STATUS.OK,
         message: 'URLs retrieved successfully',
         data: {
-          urls,
+          urls: allUrls,
           totalCount,
           limit: filters.limit || 50,
           skip: filters.skip || 0,

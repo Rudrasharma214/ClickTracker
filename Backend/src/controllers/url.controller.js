@@ -16,11 +16,6 @@ export class UrlController {
   async createUrl(req, res, next) {
     try {
       const userId = req.user?.id;
-      if (!userId) {
-        sendErrorResponse(res, STATUS.UNAUTHORIZED, 'Unauthorized', 'Access token required');
-        return;
-      }
-
       const { longUrl, customAlias, expiresAt } = req.body;
 
       if (!longUrl) {
@@ -45,7 +40,6 @@ export class UrlController {
   async getUrlByCode(req, res, next) {
     try {
       const { code } = req.params;
-
       if (!code) {
         sendErrorResponse(res, STATUS.BAD_REQUEST, 'Validation Error', 'Short code is required');
         return;
@@ -69,15 +63,10 @@ export class UrlController {
   async getUserUrls(req, res, next) {
     try {
       const userId = req.user?.id;
-      if (!userId) {
-        sendErrorResponse(res, STATUS.UNAUTHORIZED, 'Unauthorized', 'Access token required');
-        return;
-      }
-
       const { limit = 50, skip = 0, isActive } = req.query;
 
       const filters = {
-        limit: Math.min(parseInt(limit) || 50, 100), // Max 100 items per page
+        limit: Math.min(parseInt(limit) || 50, 100),
         skip: parseInt(skip) || 0,
       };
 
@@ -102,11 +91,6 @@ export class UrlController {
   async getUrlById(req, res, next) {
     try {
       const userId = req.user?.id;
-      if (!userId) {
-        sendErrorResponse(res, STATUS.UNAUTHORIZED, 'Unauthorized', 'Access token required');
-        return;
-      }
-
       const { id } = req.params;
 
       const result = await this.urlService.getUrlById(id, userId);

@@ -5,6 +5,7 @@ import { errorHandler } from './middlewares/error.middleware.js';
 import { corsOptions } from './config/corsOptions.js';
 import authRoutes from './routes/auth.routes.js';
 import urlRoutes from './routes/url.routes.js';
+import redirectRoutes from './routes/redirect.routes.js';
 import { sendResponse } from './utils/response.js';
 import { STATUS } from './constant/statusCodes.js';
 
@@ -29,9 +30,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/urls', urlRoutes);
-
-// Handle redirect for short codes (must be last to avoid conflicts with /api routes)
-app.use('/', urlRoutes);
+app.use('/api/redirect', redirectRoutes);
 
 app.use(errorHandler);
 export default app;

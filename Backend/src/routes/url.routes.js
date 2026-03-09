@@ -9,13 +9,6 @@ const urlController = new UrlController(urlService);
 const urlRoutes = express.Router();
 
 /**
- * @route GET /:code
- * @desc Redirect to original URL by short code or custom alias
- * @access Public
- */
-urlRoutes.get('/:code', urlController.getUrlByCode);
-
-/**
  * @route POST /api/urls/shorten
  * @desc Create a shortened URL
  * @access Private
