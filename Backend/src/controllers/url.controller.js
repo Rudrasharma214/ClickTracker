@@ -19,7 +19,7 @@ export class UrlController {
       const { longUrl, customAlias, expiresAt } = req.body;
 
       if (!longUrl) {
-        sendErrorResponse(res, STATUS.BAD_REQUEST, 'Validation Error', 'Long URL is required');
+        sendErrorResponse(res, STATUS.BAD_REQUEST, 'Long URL is required');
         return;
       }
 
@@ -41,7 +41,7 @@ export class UrlController {
     try {
       const { code } = req.params;
       if (!code) {
-        sendErrorResponse(res, STATUS.BAD_REQUEST, 'Validation Error', 'Short code is required');
+        sendErrorResponse(res, STATUS.BAD_REQUEST, 'Short code is required');
         return;
       }
 
@@ -110,11 +110,6 @@ export class UrlController {
   async updateUrl(req, res, next) {
     try {
       const userId = req.user?.id;
-      if (!userId) {
-        sendErrorResponse(res, STATUS.UNAUTHORIZED, 'Unauthorized', 'Access token required');
-        return;
-      }
-
       const { id } = req.params;
       const updateData = req.body;
 
@@ -135,11 +130,6 @@ export class UrlController {
   async deleteUrl(req, res, next) {
     try {
       const userId = req.user?.id;
-      if (!userId) {
-        sendErrorResponse(res, STATUS.UNAUTHORIZED, 'Unauthorized', 'Access token required');
-        return;
-      }
-
       const { id } = req.params;
 
       const result = await this.urlService.deleteUrl(id, userId);
