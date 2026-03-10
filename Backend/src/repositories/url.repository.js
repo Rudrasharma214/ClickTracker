@@ -76,11 +76,7 @@ export class UrlRepository {
 
   // Deactivate URL by ID
   async deactivateById(id) {
-    const url = await Url.findByIdAndUpdate(
-      id,
-      { isActive: false },
-      { returnDocument: 'after' }
-    );
+    const url = await Url.findByIdAndUpdate(id, { isActive: false }, { returnDocument: 'after' });
     return url;
   }
 

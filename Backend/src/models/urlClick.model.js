@@ -1,79 +1,78 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const urlClickSchema = new mongoose.Schema(
   {
     urlId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Url",
+      ref: 'Url',
       required: true,
-      index: true
+      index: true,
     },
 
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
-      index: true
+      index: true,
     },
 
     ipAddress: {
       type: String,
-      required: true
+      required: true,
     },
 
     country: {
-      type: String
+      type: String,
     },
 
     region: {
-      type: String
+      type: String,
     },
 
     city: {
-      type: String
+      type: String,
     },
 
     deviceType: {
       type: String,
-      enum: ["mobile", "tablet", "desktop", "unknown"],
-      default: "unknown",
-      index: true
+      enum: ['mobile', 'tablet', 'desktop', 'unknown'],
+      default: 'unknown',
+      index: true,
     },
 
     browser: {
       type: String,
-      index: true
+      index: true,
     },
 
     os: {
-      type: String
+      type: String,
     },
 
     userAgent: {
-      type: String
+      type: String,
     },
 
     referrer: {
       type: String,
-      default: "direct"
+      default: 'direct',
     },
 
     sessionHash: {
       type: String,
-      index: true
+      index: true,
     },
 
     clickedAt: {
       type: Date,
       default: Date.now,
-      index: true
-    }
+      index: true,
+    },
   },
   {
-    timestamps: false
+    timestamps: false,
   }
 );
-
 
 urlClickSchema.index({ urlId: 1, clickedAt: -1 });
 urlClickSchema.index({ userId: 1, clickedAt: -1 });
@@ -81,6 +80,6 @@ urlClickSchema.index({ country: 1 });
 urlClickSchema.index({ deviceType: 1 });
 urlClickSchema.index({ browser: 1 });
 
-const UrlClick = mongoose.model("UrlClick", urlClickSchema);
+const UrlClick = mongoose.model('UrlClick', urlClickSchema);
 
 export default UrlClick;

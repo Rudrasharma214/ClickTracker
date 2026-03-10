@@ -5,7 +5,6 @@ export class UrlController {
   constructor(urlService) {
     this.urlService = urlService;
     this.createUrl = this.createUrl.bind(this);
-    this.getUrlByCode = this.getUrlByCode.bind(this);
     this.getUserUrls = this.getUserUrls.bind(this);
     this.getUrlById = this.getUrlById.bind(this);
     this.updateUrl = this.updateUrl.bind(this);
@@ -31,29 +30,6 @@ export class UrlController {
       }
 
       sendResponse(res, result.status, result.message, result.data);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  // Redirect to original URL
-  async getUrlByCode(req, res, next) {
-    try {
-      const { code } = req.params;
-      if (!code) {
-        sendErrorResponse(res, STATUS.BAD_REQUEST, 'Short code is required');
-        return;
-      }
-
-      const result = await this.urlService.getUrlByCode(code);
-
-      if (!result.success) {
-        sendErrorResponse(res, result.status, result.message);
-        return;
-      }
-
-      // Redirect to original URL
-      res.redirect(301, result.data.longUrl);
     } catch (error) {
       next(error);
     }

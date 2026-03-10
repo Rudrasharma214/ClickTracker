@@ -84,64 +84,6 @@ export class UrlService {
     }
   }
 
-  // Get URL by short code or custom alias and increment clicks
-  async getUrlByCode(code) {
-    try {
-      // Try to find by shortCode first, then by customAlias
-      let url = await urlRepo.findByShortCode(code);
-
-      if (!url) {
-        url = await urlRepo.findByCustomAlias(code);
-      }
-
-      if (!url) {
-        return {
-          success: false,
-          status: STATUS.NOT_FOUND,
-          message: 'URL not found',
-        };
-      }
-
-      // Check if URL is active
-      if (!url.isActive) {
-        return {
-          success: false,
-          status: STATUS.GONE,
-          message: 'This URL has been deactivated',
-        };
-      }
-
-      // Check if URL is expired
-      if (url.isExpired) {
-        return {
-          success: false,
-          status: STATUS.GONE,
-          message: 'This URL has expired',
-        };
-      }
-
-      // Increment click count
-      url = await urlRepo.incrementClicks(url._id);
-
-      return {
-        success: true,
-        status: STATUS.OK,
-        message: 'URL retrieved successfully',
-        data: {
-          longUrl: url.longUrl,
-          totalClicks: url.totalClicks,
-        },
-      };
-    } catch (error) {
-      return {
-        success: false,
-        status: STATUS.INTERNAL_ERROR,
-        message: 'Error retrieving URL',
-        error: error.message,
-      };
-    }
-  }
-
   // Get all URLs for a user
   async getUserUrls(userId, filters = {}) {
     try {
