@@ -77,8 +77,6 @@ const urlClickSchema = new mongoose.Schema(
 urlClickSchema.index({ urlId: 1, clickedAt: -1 });
 urlClickSchema.index({ userId: 1, clickedAt: -1 });
 urlClickSchema.index({ country: 1 });
-urlClickSchema.index({ deviceType: 1 });
-urlClickSchema.index({ browser: 1 });
 
 const UrlClick = mongoose.model('UrlClick', urlClickSchema);
 

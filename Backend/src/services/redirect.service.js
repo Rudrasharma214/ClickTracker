@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import UAParser from 'ua-parser-js';
+import { UAParser } from 'ua-parser-js';
 import geoip from 'geoip-lite';
 import { STATUS } from '../constant/statusCodes.js';
 import { RedirectRepository } from '../repositories/redirect.repository.js';
