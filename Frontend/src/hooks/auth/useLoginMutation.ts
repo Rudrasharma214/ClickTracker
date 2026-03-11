@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { login } from '../../api/authService';
+import { login, refreshToken } from '../../api/authService';
 import { useAuth } from '../../context/AuthContext';
 import type { LoginPayload } from '../../types/auth.types';
 
@@ -8,12 +8,20 @@ export const useLoginMutation = () => {
 
     return useMutation({
         mutationFn: (payload: LoginPayload) => login(payload),
-        onSuccess: (response) => {
-            const data = response.data.data;
-            if (data) {
+        onSuccess: async () => {
+            // Backend returns data: null on login — tokens are set as httpOnly cookies.
+            // Call refresh-token to get the new access token + user info.
+            const { data } = await refreshToken();
+            const payload = data.data;
+            if (payload?.accessToken) {
                 updateAuth(
-                    { id: data.id, name: data.name, email: data.email, createdAt: data.createdAt },
-                    data.accessToken ?? null,
+                    {
+                        id: payload.user!.id,
+                        name: payload.user!.name,
+                        email: payload.user!.email,
+                        createdAt: payload.user!.createdAt,
+                    },
+                    payload.accessToken,
                 );
             }
         },

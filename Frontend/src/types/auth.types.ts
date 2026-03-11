@@ -21,10 +21,12 @@ export interface AuthResponse {
     status: number;
     message: string;
     data?: {
-        id: string;
-        name: string;
-        email: string;
-        createdAt: string;
-        accessToken?: string;
+        accessToken: string;
+        user: {
+            id: string;
+            name: string;
+            email: string;
+            createdAt: string;
+        };
     };
 }

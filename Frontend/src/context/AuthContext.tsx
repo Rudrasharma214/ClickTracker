@@ -23,14 +23,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const restoreSession = async () => {
             try {
                 const { data } = await refreshTokenApi();
-                if (data.data?.accessToken) {
-                    setToken(data.data.accessToken);
-                    setAccessToken(data.data.accessToken);
+                const payload = data.data;
+                if (payload?.accessToken) {
+                    setToken(payload.accessToken);
+                    setAccessToken(payload.accessToken);
                     setUser({
-                        id: data.data.id!,
-                        name: data.data.name!,
-                        email: data.data.email!,
-                        createdAt: data.data.createdAt!,
+                        id: payload.user!.id,
+                        name: payload.user!.name,
+                        email: payload.user!.email,
+                        createdAt: payload.user!.createdAt,
                     });
                 }
             } catch {

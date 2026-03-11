@@ -99,7 +99,7 @@ export class AuthController {
 
       res.cookie('accessToken', result.data.accessToken, ACCESS_TOKEN_COOKIE_OPTIONS);
 
-      sendResponse(res, result.status, result.message, null);
+      sendResponse(res, result.status, result.message, result.data);
     } catch (error) {
       next(error);
     }

@@ -139,7 +139,15 @@ export class AuthService {
         success: true,
         status: STATUS.OK,
         message: 'Token refreshed successfully',
-        data: newAccessToken,
+        data: {
+          accessToken: newAccessToken,
+          user: {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+          },
+        },
       };
     } catch (error) {
       return {
