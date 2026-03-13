@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { login, refreshToken } from '../../api/authService';
+import { login, refreshToken } from '../../services/authService';
 import { useAuth } from '../../context/AuthContext';
 import type { LoginPayload } from '../../types/auth.types';
 
