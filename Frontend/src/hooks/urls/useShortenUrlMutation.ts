@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { shortenUrl } from '../../api/urlService';
+import { shortenUrl } from '../../services/urlService';
 import type { ShortenPayload } from '../../types/url.types';
 
 export const useShortenUrlMutation = () => {

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUrlById } from '../../api/urlService';
+import { getUrlById } from '../../services/urlService';
 
 export const useUrlByIdQuery = (id: string) => {
     return useQuery({

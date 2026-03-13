@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { refreshToken as refreshTokenApi } from '../api/authService';
-import { setAccessToken } from '../api/axiosInstance';
+import { refreshToken as refreshTokenApi } from '../services/authService';
+import { setAccessToken } from '../services/axiosInstance';
 import type { User } from '../types/auth.types';
 
 interface AuthContextValue {
